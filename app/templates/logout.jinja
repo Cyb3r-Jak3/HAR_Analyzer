@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+{% block head %}
+    <title>Logout</title>
+    {% include "bootstrap_and_favicon.jinja" %}
+    <link rel="stylesheet" href={{ url_for("static", filename="main.css") }}>
+
+{% endblock %}
+
+{% block body %}
+    <div class="solid-border align-content-center d-flex justify-content-md-center align-items-center vh-100">
+      <p>
+          {{ message }}
+      </p>
+    </div>
+    <div class="solid-border align-content-center d-flex justify-content-md-center align-items-center vh-100">
+        <p>
+            <a href="/">Return to homepage</a>
+        </p>
+    </div>
+{% include "footer.jinja" %}
+{% endblock body %}
+</html>

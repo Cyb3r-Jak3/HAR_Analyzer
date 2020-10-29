@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+{% block head %}
+    <title>About HARALYZER</title>
+    {% include "bootstrap_and_favicon.jinja" %}
+    <link rel="stylesheet" href={{ url_for("static", filename="main.css") }}>
+
+{% endblock %}
+
+{% block body %}
+<div class="container">
+<div class="row">
+    <div class="solid-border align-content-center d-flex justify-content-center align-items-center">
+        <p>
+            HAR_alyzer is a tool that enables people to easily be able to troubleshoot browser programs or websites. This project was designed to be an alternative to Google's HAR File tool.
+
+            This project is still very new and there is a lot of features that I want to add. This is also my first web app that I designed and coded the front and back end of.
+
+            Check out the source code <a href="https://github.com/Cyb3r-Jak3/HAR_alyzer">here</a>.
+        </p>
+    </div>
+    <div class="solid-border align-content-center d-flex justify-content-center align-items-center vh-100">
+        <p>
+            If you can't tell, I mainly deal with backend so the front-end will look a bit rough...
+        </p>
+    </div>
+    </div>
+</div>
+{% endblock %}
+{% include "footer.jinja" %}
+</html>

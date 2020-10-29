@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  web:
+    build: .
+    environment:
+      - REDIS_URL=redis://redis
+      - FLASK_SECRET=PLEASE_CHANGE_ME
+      - UPLOAD_FOLDER=./app/uploads
+    ports:
+      - "8000:8000"
+  redis:
+    image: "redis:alpine"

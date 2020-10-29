@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+{% block head %}
+    <title>HAR_alyzer Report</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% include "bootstrap_and_favicon.jinja" %}
+    <link rel="stylesheet" href={{ url_for("static", filename="report.css") }}>
+    <script src={{ url_for("static", filename="action.js") }}></script>
+{% endblock %}
+<header class="header navbar sticky-top bg-light">
+    <span class="header-left">HAR File Analyzer</span>
+    <span class="header-right"><a href="/logout"> End Session </a></span>
+</header>
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+    <div class="entry_list col overflow-auto">
+
+        {% for entry in items %}
+            {% if entry.status in [200, 201, 202] %}
+                <div class="good_entry entry" onclick="click_function( {{ loop.index - 1 }})">
+            {%  elif entry.status in [400,401,402,403,404,500,502,503,500] %}
+                <div class="bad_entry entry ">
+            {% else %}
+                <div class="entry">
+            {% endif %}
+                <p> <b>Status:</b> {{ entry.status }} <b>URL:</b> {{ entry.url }} </p>
+                <p> <b>IP:</b> {{ entry.serverAddress }} </p>
+            </div>
+        {% endfor %}
+        </div>
+
+    <div class="results_section col overflow-auto">
+        <div class="tab">
+          <button class="tablinks" onclick="changeTab(event, 'Summary')">Summary</button>
+          <button class="tablinks" onclick="changeTab(event, 'Request')">Request</button>
+          <button class="tablinks" onclick="changeTab(event, 'Response')">Response</button>
+        </div>
+
+        <div id="Summary" class="tabcontent">
+            <p> <b>Secure</b> <span id="secureState"></span></p>
+            <p> <b>Port</b> <span id="port"></span> </p>
+            <p> <b>IP Address</b> <span id="IP"></span> </p>
+            <p> <b>Date</b> <span id="startDate"></span></p>
+            <p> <b>Time</b> <span id="time"></span></p>
+        </div>
+
+        <div id="Request" class="tabcontent">
+            <p> <b>Body Size</b> <span id="request_body"></span></p>
+            <p> <b>Headers Size</b> <span id="headerSize"></span></p>
+            <p> <b>HTTP Method</b> <span id="method"></span></p>
+            <p> <b>HTTP Version</b> <span id="HTTPversion"></span></p>
+            <p> <b>URL</b> <span id="URL"></span></p>
+        </div>
+
+        <div id="Response" class="tabcontent">
+            <p> <b>Body Size</b> <span id="response_body"></span></p>
+            <p> <b>MIME Type</b> <span id="mimeType"></span></p>
+            <b>Content</b>
+            <p id="response_content"></p>
+        </div>
+    </div>
+</div>
+{% include "footer.jinja" %}
+    {% endblock %}
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+{% block head %}
+    <title>Upload new File</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href={{ url_for("static", filename="main.css") }}>
+    {% include "bootstrap_and_favicon.jinja" %}
+{% endblock %}
+{% block body %}
+    <h1 class="center">Upload File</h1>
+    <span class="center solid-border d-flex justify-content-md-center align-items-center vh-100">
+        <form method=post action="/upload" enctype=multipart/form-data>
+            <input type=file name=har_file>
+            <input type=submit value=Upload>
+        </form>
+    </span>
+{% include "footer.jinja" %}
+{% endblock %}
+</html>
