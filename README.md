@@ -14,4 +14,4 @@ I am working on hosting this application so to allow for easier access.
 
 ### Docker
 
-There is a docker image to run this locally. You do need a redis instance as it is used for security purposes. Check out the [docker-compose.yml](docker-compose.yml) file for an example of running that way.
+There is a docker image to run this locally. Docker image is `cyb3r-jak3/har_analyzer` [here](https://hub.docker.com/repository/docker/cyb3rjak3/har_analyzer). You do need a redis instance as it is used for security purposes. Check out the [docker-compose.yml](docker-compose.yml) file for an example of running it.

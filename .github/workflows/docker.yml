@@ -19,5 +19,5 @@ jobs:
     - name: Build
       run: docker build --file Dockerfile --tag cyb3rjak3/har_analyzer:latest --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VCS_REF=`git rev-parse --short HEAD` .
 
-    - name: Push Source To Docker
-      run: docker push cyb3rjak3/html5validator:latest
+    - name: Push To Docker
+      run: docker push cyb3rjak3/har_analyzer:latest
