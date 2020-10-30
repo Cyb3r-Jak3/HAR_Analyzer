@@ -3,9 +3,18 @@ from flask_hashing import Hashing
 from flask_cors import CORS
 from flask_redis import FlaskRedis
 import os
+if os.getenv("SENTRY_DSN"):
+    from sentry_sdk.integrations.flask import FlaskIntegration
+    import sentry_sdk
 
 
 def create_app():
+    if os.getenv("SENTRY_DSN"):
+        sentry_sdk.init(
+            dsn=os.environ["SENTRY_DSN"],
+            integrations=[FlaskIntegration()],
+            traces_sample_rate=1.0
+        )
     app = Flask(__name__)
     app.config.update(
         SESSION_COOKIE_SECURE=True,
