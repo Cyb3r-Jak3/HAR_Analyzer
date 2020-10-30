@@ -1,0 +1,1 @@
+web: gunicorn -k gevent --workers 8 app:app
