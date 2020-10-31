@@ -16,18 +16,18 @@ def create_app():
             traces_sample_rate=1.0
         )
     app = Flask(__name__)
+    app.secret_key = os.environ["FLASK_SECRET"]
     app.config.update(
         SESSION_COOKIE_SECURE=True,
         SESSION_COOKIE_HTTPONLY=True,
-        SESSION_COOKIE_SAMESITE='Lax',
+        SESSION_COOKIE_SAMESITE="Lax",
         REDIS_URL=os.environ["REDIS_URL"],
-        VERSION="0.0.1-dev",
-        UPLOAD_FOLDER=os.getenv("UPLOAD_FOLDER", "./uploads")
+        VERSION="0.0.1",
+        UPLOAD_FOLDER=os.getenv("UPLOAD_FOLDER", "/tmp")
     )
     CORS(app,
          methods=["GET", "POST", "OPTIONS"],
          supports_credential=True)
     app.redis_client = FlaskRedis(app)
     app.hashing = Hashing(app)
-    app.secret_key = os.environ["FLASK_SECRET"]
     return app
