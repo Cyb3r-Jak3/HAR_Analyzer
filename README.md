@@ -16,3 +16,7 @@ Visit https://har-analyzer.jwhite.network/ use the web version.
 ### Docker
 
 There is a docker image to run this locally. Docker image is `cyb3r-jak3/har_analyzer` [here](https://hub.docker.com/repository/docker/cyb3rjak3/har_analyzer). You do need a redis instance as it is used for security purposes. Check out the [docker-compose.yml](docker-compose.yml) file for an example of running it.
+
+### GitHub
+
+There is also a GitHub package that you can use to run this image. Details are [here](https://github.com/Cyb3r-Jak3/HAR_Analyzer/packages/482371)
