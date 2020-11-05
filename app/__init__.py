@@ -16,6 +16,8 @@ def allowed_file(filename: str):
 def require_auth(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
+        if not app.config.get("REDIS_URL"):
+            return f(*args, **kwargs)
         session_hash = session.get("filename")
         if session_hash is None:
             abort(404)
@@ -41,7 +43,9 @@ def session_info():
         {
             "Session Hash": session.get("hash"),
             "Session Filename": session.get("filename"),
-            "Version": app.config.get("version")
+            "Version": app.config.get("VERSION"),
+            "Redis": True if os.getenv("REDIS_URL") else False,
+            "Git HASH": os.getenv("HEROKU_SLUG_COMMIT", None)
         }
     )
 
@@ -64,11 +68,12 @@ def upload():
             return render_template("error.jinja", message="No File upload"), 400
         if file and allowed_file(file.filename):
             session["filename"] = app.hashing.hash_value(file.read(), salt=app.secret_key)
-            session["token"] = uuid4()
             file.stream.seek(0)
             file.save(os.path.join(app.config["UPLOAD_FOLDER"], session["filename"]))
             file.close()
-            app.redis_client.set(session["token"].bytes, session["filename"])
+            if app.config.get("REDIS_URL"):
+                session["token"] = uuid4()
+                app.redis_client.set(session["token"].bytes, session["filename"])
             return redirect(url_for("report"))
     return render_template("upload.jinja")
 
@@ -83,7 +88,8 @@ def entry_choice():
 def logout():
     try:
         os.remove(os.path.join(app.config['UPLOAD_FOLDER'], session["filename"]))
-        app.redis_client.delete(session["token"].bytes)
+        if app.config.get("REDIS_URL"):
+            app.redis_client.delete(session["token"].bytes)
         session.clear()
         return render_template(
             "logout.jinja",
