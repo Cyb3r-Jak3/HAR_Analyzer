@@ -1,9 +1,11 @@
+"""File that deals with all the Har files and parsing"""
 import json
 import os
 from haralyzer_3 import HarParser, HarPage
 
 
-def mimeType_splitter(mime_type: str) -> str:
+def mimetype_splitter(mime_type: str) -> str:
+    """Returns the mimetype of the content"""
     raw_type = mime_type
     if raw_type.find(";"):
         raw_type = raw_type.split(";")[0]
@@ -11,6 +13,7 @@ def mimeType_splitter(mime_type: str) -> str:
 
 
 def create_request_count(page: HarPage, attribute: str) -> dict:
+    """Gets all the request content"""
     results = {}
     for entry in page.entries:
         item = getattr(entry.request, attribute)
@@ -23,11 +26,12 @@ def create_request_count(page: HarPage, attribute: str) -> dict:
 
 
 def create_response_count(page: HarPage, attribute: str) -> dict:
+    """Gets all the response conent"""
     results = {}
     for entry in page.entries:
         item = getattr(entry.response, attribute)
         if attribute == "mimeType":
-            item = mimeType_splitter(item)
+            item = mimetype_splitter(item)
         if item in results.keys():
             results[item] += 1
         else:
@@ -37,6 +41,7 @@ def create_response_count(page: HarPage, attribute: str) -> dict:
 
 
 def create_root_count(page: HarPage, attribute: str) -> dict:
+    """Get the count of the root entry info"""
     results = {}
     for entry in page.entries:
         item = getattr(entry, attribute)
@@ -49,7 +54,10 @@ def create_root_count(page: HarPage, attribute: str) -> dict:
 
 
 def get_entries(filename: str, entry_id: int = None) -> (dict, list):
-    with open(os.path.join(os.getenv("UPLOAD_FOLDER", "./uploads"), filename), 'r') as process_file:
+    """Gets either all the entries or a certain one"""
+    with open(
+        os.path.join(os.getenv("UPLOAD_FOLDER", "./uploads"), filename), "r"
+    ) as process_file:
         render_pages = HarParser(json.loads(process_file.read())).pages
     items = [entry for page in render_pages for entry in page.entries]
     if isinstance(entry_id, int):

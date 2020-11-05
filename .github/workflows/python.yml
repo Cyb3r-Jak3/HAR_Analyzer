@@ -1,0 +1,30 @@
+name: Python CI
+
+on:
+  push:
+    branches:
+      - "**"
+  schedule:
+    - cron: '0 8 * * 0'
+
+jobs:
+  Docker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+  - name: Install Dependanices
+    run: |
+      pip install --upgrade pip wheel
+      pip install . -r requirements-dev.txt
+
+    - name: Python Black
+      run: black --check app
+
+    - name: Pylint
+      run: pylint app
+
+    - name: Flake8
+      run: flake8 --statistics --show-source --count app
+
+    - name: Bandit
+      run: bandit -r app
