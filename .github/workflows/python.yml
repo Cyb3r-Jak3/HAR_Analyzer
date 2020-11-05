@@ -13,10 +13,15 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.6
+
     - name: Install Dependanices
       run: |
         pip install --upgrade pip wheel
-        pip install . -r requirements-dev.txt
+        pip install -r requirements-dev.txt
 
     - name: Python Black
       run: black --check app
