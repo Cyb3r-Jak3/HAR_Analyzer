@@ -1,1 +1,1 @@
-web: gunicorn -k gevent --workers 8 app:app
+web: gunicorn -k gevent --preload --workers 8 app:app

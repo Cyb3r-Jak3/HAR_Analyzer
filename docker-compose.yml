@@ -1,11 +1,11 @@
 version: "3.8"
 services:
   web:
-    build: .
+    image: "cyb3rjak3/har_analyzer"
     environment:
       - REDIS_URL=redis://redis
       - FLASK_SECRET=PLEASE_CHANGE_ME
-      - UPLOAD_FOLDER=./app/uploads
+      - UPLOAD_FOLDER=/tmp/
     ports:
       - "8000:8000"
   redis:
