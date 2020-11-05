@@ -12,19 +12,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-  - name: Install Dependanices
-    run: |
-      pip install --upgrade pip wheel
-      pip install . -r requirements-dev.txt
 
-    - name: Python Black
-      run: black --check app
+    - name: Install Dependanices
+      run: |
+        pip install --upgrade pip wheel
+        pip install . -r requirements-dev.txt
 
-    - name: Pylint
-      run: pylint app
+      - name: Python Black
+        run: black --check app
 
-    - name: Flake8
-      run: flake8 --statistics --show-source --count app
+      - name: Pylint
+        run: pylint app
 
-    - name: Bandit
-      run: bandit -r app
+      - name: Flake8
+        run: flake8 --statistics --show-source --count app
+
+      - name: Bandit
+        run: bandit -r app
