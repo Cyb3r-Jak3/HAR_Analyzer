@@ -25,7 +25,7 @@ def create_app() -> Flask:
         SESSION_COOKIE_SECURE=True,
         SESSION_COOKIE_HTTPONLY=True,
         SESSION_COOKIE_SAMESITE="Lax",
-        VERSION="0.0.1",
+        VERSION="0.0.2",
         UPLOAD_FOLDER=os.getenv("UPLOAD_FOLDER", "/tmp"),  # nosec
     )
     CORS(app, methods=["GET", "POST", "OPTIONS"], supports_credential=True)
