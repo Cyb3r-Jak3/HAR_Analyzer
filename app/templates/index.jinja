@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-{% block head %}
-    <meta charset="UTF-8">
+<head>
     <title>Haralyzer Web</title>
     <link rel="stylesheet" href={{ url_for("static", filename="main.css") }}>
     {% include "bootstrap_and_favicon.jinja" %}
-{% endblock %}
-{% block body %}
+</head>
+<body>
     <div class="center solid-border d-flex align-content-center justify-content-md-center align-items-center vh-100">
         <p>Welcome to Haralyzer web. To get started click <a href="/upload">here</a></p>
     </div>
     <div class="center solid-border d-flex justify-content-md-center align-items-center vh-100">
         <p>To learn more about this site check out the <a href="about">about page</a> </p>
     </div>
-{% endblock %}
 {% include "footer.jinja" %}
+</body>
 </html>

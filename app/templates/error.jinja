@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-{% block head %}
+<head>
     <title>Error</title>
     {% include "bootstrap_and_favicon.jinja" %}
     <link rel="stylesheet" href={{ url_for("static", filename="main.css") }}>
 
-{% endblock %}
+</head>
 
-{% block body %}
+<body>
     <div class="d-flex justify-content-md-center align-items-center vh-100">
         <h1>Error</h1>
     </div>
@@ -22,6 +22,6 @@
     </div>
 
 
-{% endblock %}
+</body>
 
 </html>
