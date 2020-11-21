@@ -16,6 +16,7 @@ def allowed_file(filename: str):
 
 def require_auth(fuc):
     """"Wrapper to verify the auth with redis"""
+
     @wraps(fuc)
     def decorated_function(*args, **kwargs):
         if not app.config.get("REDIS_URL"):
