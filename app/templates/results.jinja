@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-{% block head %}
+<head>
     <title>HAR_alyzer Report</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {% include "bootstrap_and_favicon.jinja" %}
     <link rel="stylesheet" href={{ url_for("static", filename="report.css") }}>
     <script src={{ url_for("static", filename="action.js") }}></script>
-{% endblock %}
+</head>
 <header class="header navbar sticky-top bg-light">
     <span class="header-left">HAR File Analyzer</span>
     <span class="header-right"><a href="/logout"> End Session </a></span>
 </header>
 
-{% block body %}
+<body>
 <div class="container-fluid">
     <div class="row">
     <div class="entry_list col overflow-auto">
@@ -22,9 +20,9 @@
             {% if entry.status in [200, 201, 202] %}
                 <div class="good_entry entry" onclick="click_function( {{ loop.index - 1 }})">
             {%  elif entry.status in [400,401,402,403,404,500,502,503,500] %}
-                <div class="bad_entry entry ">
+                <div class="bad_entry entry" onclick="click_function( {{ loop.index - 1 }})">>
             {% else %}
-                <div class="entry">
+                <div class="entry" onclick="click_function( {{ loop.index - 1 }})">>
             {% endif %}
                 <p> <b>Status:</b> {{ entry.status }} <b>URL:</b> {{ entry.url }} </p>
                 <p> <b>IP:</b> {{ entry.serverAddress }} </p>
@@ -64,5 +62,5 @@
     </div>
 </div>
 {% include "footer.jinja" %}
-    {% endblock %}
+</body>
 </html>

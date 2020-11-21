@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-{% block head %}
+<head>
     <title>About HARALYZER</title>
     {% include "bootstrap_and_favicon.jinja" %}
     <link rel="stylesheet" href={{ url_for("static", filename="main.css") }}>
 
-{% endblock %}
+</head>
 
-{% block body %}
+<body>
 <div class="container">
 <div class="row">
     <div class="solid-border align-content-center d-flex justify-content-center align-items-center">
@@ -26,6 +26,7 @@
     </div>
     </div>
 </div>
-{% endblock %}
+
 {% include "footer.jinja" %}
+</body>
 </html>

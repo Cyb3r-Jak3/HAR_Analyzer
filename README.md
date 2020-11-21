@@ -10,7 +10,7 @@ This project uses [haralyzer_3](https://github.com/Cyb3r-Jak3/haralyzer_3)
 
 ### Web
 
-Visit https://har-analyzer.jwhite.network/ use the web version.
+Visit [https://har-analyzer.jwhite.network/](https://har-analyzer.jwhite.network/) use the web version.
 
 
 ### Docker
