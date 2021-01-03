@@ -1,7 +1,7 @@
 """File that deals with all the Har files and parsing"""
 import json
 import os
-from haralyzer_3 import HarParser, HarPage
+from haralyzer import HarParser, HarPage
 
 
 def mimetype_splitter(mime_type: str) -> str:
@@ -26,7 +26,7 @@ def create_request_count(page: HarPage, attribute: str) -> dict:
 
 
 def create_response_count(page: HarPage, attribute: str) -> dict:
-    """Gets all the response conent"""
+    """Gets all the response content"""
     results = {}
     for entry in page.entries:
         item = getattr(entry.response, attribute)
