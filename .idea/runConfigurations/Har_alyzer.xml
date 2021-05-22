@@ -2,11 +2,8 @@
   <configuration default="false" name="Har_alyzer" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
     <deployment type="dockerfile">
       <settings>
-        <option name="imageTag" value="har_alyzer" />
-        <option name="buildCliOptions" value="" />
-        <option name="command" value="" />
-        <option name="containerName" value="" />
-        <option name="entrypoint" value="" />
+        <option name="imageTag" value="cyb3rjak3/har_alyzer" />
+        <option name="containerName" value="har_alyzer" />
         <option name="portBindings">
           <list>
             <DockerPortBindingImpl>
@@ -15,7 +12,7 @@
             </DockerPortBindingImpl>
           </list>
         </option>
-        <option name="commandLineOptions" value="" />
+        <option name="commandLineOptions" value="--env-file=.env" />
         <option name="sourceFilePath" value="Dockerfile" />
       </settings>
     </deployment>

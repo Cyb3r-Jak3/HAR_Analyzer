@@ -30,14 +30,5 @@ jobs:
         pip install --upgrade pip wheel
         pip install -r requirements-dev.txt
 
-    - name: Python Black
-      run: black --check app
-
-    - name: Pylint
-      run: pylint app
-
-    - name: Flake8
-      run: flake8 --statistics --show-source --count app
-
-    - name: Bandit
-      run: bandit -r app
+    - name: Lint
+      run: make lint

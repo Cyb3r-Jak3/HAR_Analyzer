@@ -56,7 +56,7 @@ def create_root_count(page: HarPage, attribute: str) -> dict:
 def get_entries(filename: str, entry_id: int = None) -> (dict, list):
     """Gets either all the entries or a certain one"""
     with open(
-        os.path.join(os.getenv("UPLOAD_FOLDER", "./uploads"), filename), "r"
+        os.path.join(os.getenv("UPLOAD_FOLDER", "/tmp"), filename), "r"  # nosec
     ) as process_file:
         render_pages = HarParser(json.loads(process_file.read())).pages
     items = [entry for page in render_pages for entry in page.entries]

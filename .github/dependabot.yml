@@ -1,14 +1,34 @@
 version: 2
 updates:
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    assignees:
+        - "Cyb3r-Jak3"
+    labels:
+        - "dependencies"
+    reviewers:
+        - "Cyb3r-Jak3"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    assignees:
+        - "Cyb3r-Jak3"
+    labels:
+        - "dependencies"
+    reviewers:
+        - "Cyb3r-Jak3"
   - package-ecosystem: "pip"
     directory: "/"
     labels:
-      - "dependencies"
+        - "dependencies"
     schedule:
       interval: "weekly"
     assignees:
       - "Cyb3r-Jak3"
     commit-message:
-      prefix: "Pip: "
+      prefix: "Pip Update"
     reviewers:
       - "Cyb3r-Jak3"
