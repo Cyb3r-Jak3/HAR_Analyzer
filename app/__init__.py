@@ -25,7 +25,7 @@ def allowed_file(filename: str):
 
 
 def require_auth(fuc):
-    """ "Wrapper to verify the auth with redis"""
+    """Wrapper to verify the auth with redis"""
 
     @wraps(fuc)
     def decorated_function(*args, **kwargs):
@@ -132,7 +132,7 @@ def bad_request_error(err):
 
 @app.errorhandler(404)
 def page_not_found(err):
-    """ "Handles 404 errors"""
+    """Handles 404 errors"""
     return render_template("error.jinja", message=err), 404
 
 
