@@ -2,7 +2,17 @@
 import os
 from functools import wraps
 from uuid import uuid4
-from flask import abort, render_template, redirect, url_for, request, session, jsonify
+
+from flask import (
+    abort,
+    render_template,
+    redirect,
+    url_for,
+    request,
+    session,
+    jsonify,
+    Response,
+)
 from .har_worker import get_entries
 from .create_app import create_app
 
@@ -15,7 +25,7 @@ def allowed_file(filename: str):
 
 
 def require_auth(fuc):
-    """"Wrapper to verify the auth with redis"""
+    """ "Wrapper to verify the auth with redis"""
 
     @wraps(fuc)
     def decorated_function(*args, **kwargs):
@@ -46,7 +56,7 @@ def about():
 
 
 @app.route("/debug")
-def session_info() -> dict:
+def session_info() -> Response:
     """Returns debugging info"""
     return jsonify(
         {
@@ -122,7 +132,7 @@ def bad_request_error(err):
 
 @app.errorhandler(404)
 def page_not_found(err):
-    """"Handles 404 errors"""
+    """ "Handles 404 errors"""
     return render_template("error.jinja", message=err), 404
 
 
