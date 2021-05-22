@@ -64,7 +64,7 @@ def session_info() -> Response:
             "Session Filename": session.get("filename"),
             "Version": app.config.get("VERSION"),
             "Redis": bool(os.getenv("REDIS_URL")),
-            "Git HASH": os.getenv("HEROKU_SLUG_COMMIT", None),
+            "Git HASH": os.getenv("VCS_REF"),
         }
     )
 
