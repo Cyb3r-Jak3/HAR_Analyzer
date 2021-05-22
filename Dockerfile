@@ -1,4 +1,4 @@
-FROM pypy:3-slim
+FROM ghcr.io/cyb3r-jak3/pypy-flask:latest
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -10,12 +10,8 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.opencontainers.image.source="https://github.com/Cyb3r-Jak3/HAR_Analyzer"
 
 COPY requirements.txt /tmp/pip-tmp/
-RUN apt-get update \
-   && apt install --no-install-recommends -y build-essential \
-   && pip --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt \
-   && rm -rf /tmp/pip-tmp /var/lib/apt/lists/* \
-   && apt purge build-essential -y \
-   && apt autoremove -y
+RUN pip --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt \
+    && rm -rf /tmp/pip-tmp
 
 COPY app /usr/src/app/app
 
