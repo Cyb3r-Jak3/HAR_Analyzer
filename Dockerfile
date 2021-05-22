@@ -1,4 +1,4 @@
-FROM cyb3rjak3/pypy-flask:latest
+FROM ghcr.io/cyb3r-jak3/pypy-flask:latest
 
 ARG BUILD_DATE
 ARG VCS_REF

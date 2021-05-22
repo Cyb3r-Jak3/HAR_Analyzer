@@ -8,7 +8,7 @@ on:
       - "**"
 
 jobs:
-  Check_Docker:
+  Docker:
     runs-on: ubuntu-latest
     steps:
 
