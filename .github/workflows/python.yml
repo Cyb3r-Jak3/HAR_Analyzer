@@ -2,8 +2,9 @@ name: Python CI
 
 on:
   push:
-    branches:
-      - "**"
+    paths:
+      - "app/**"
+      - ".github/workflows/python.yml"
   schedule:
     - cron: '0 8 * * 0'
 
