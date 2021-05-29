@@ -2,7 +2,7 @@ HAR Analyzer
 ---
 
 HAR Analyzer is a utility/app that allows for easy visualization of HTTP Archive (HAR) Files.
-I typically do backend coding so the front end is a bit rusty and does not looks as clean as I would like.
+I typically do backend coding, so the front end is a bit rusty and does not look as clean as I would like.
 
 This project uses [haralyzer](https://github.com/haralyzer/haralyzer)
 
@@ -10,7 +10,7 @@ This project uses [haralyzer](https://github.com/haralyzer/haralyzer)
 
 ### Web
 
-Visit [https://har-analyzer.jwhite.network/](https://har-analyzer.jwhite.network/) use the web version.
+~~Visit [https://har-analyzer.jwhite.network/](https://har-analyzer.jwhite.network/) use the web version.~~ Current offline
 
 
 ### Docker
@@ -21,4 +21,4 @@ Optionally, you change use a redis instance as it is used for security purposes.
 
 ### GitHub
 
-There is also a GitHub package that you can use to run this image. Details are [here](https://github.com/Cyb3r-Jak3/HAR_Analyzer/packages/482371)
+There is also a GitHub image that you can use to run this image. Details are [here](https://github.com/users/Cyb3r-Jak3/packages/container/package/har_analyzer)
