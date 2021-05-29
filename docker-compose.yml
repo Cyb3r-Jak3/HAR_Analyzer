@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   web:
-    image: "cyb3rjak3/har_analyzer"
+    build: .
     environment:
       - REDIS_URL=redis://redis
       - FLASK_SECRET=PLEASE_CHANGE_ME

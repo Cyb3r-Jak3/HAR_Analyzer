@@ -1,4 +1,4 @@
-PHONY: lint
+PHONY: lint reformat
 
 
 lint:
