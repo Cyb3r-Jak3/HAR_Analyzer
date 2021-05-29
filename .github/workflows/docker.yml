@@ -4,8 +4,12 @@ on:
   push:
     branches:
       - "**"
-    tags-ignore:
-      - "**"
+    paths:
+      - "app/**"
+      - ".github/workflows/docker.yml"
+      - "Dockerfile"
+    tags:
+      - "v*"
 
 jobs:
   Docker:
