@@ -1,4 +1,4 @@
-﻿haralyzer==1.9.0
+﻿haralyzer==2.0.0
 Flask==2.0.1
 Flask-Hashing == 1.1
 flask-cors==3.0.10
