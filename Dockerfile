@@ -1,4 +1,4 @@
-FROM ghcr.io/cyb3r-jak3/pypy-flask:1.2-alpine
+FROM ghcr.io/cyb3r-jak3/pypy-flask:alpine
 
 COPY requirements.txt /tmp/pip-tmp/
 RUN pip --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt \
