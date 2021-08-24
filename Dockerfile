@@ -1,7 +1,7 @@
 FROM ghcr.io/cyb3r-jak3/pypy-flask:alpine
 
 COPY requirements.txt /tmp/pip-tmp/
-RUN pip list && pip --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt \
+RUN pip --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt \
     && rm -rf /tmp/pip-tmp
 
 COPY app /usr/src/app/app
