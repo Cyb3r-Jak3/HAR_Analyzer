@@ -12,7 +12,7 @@ jobs:
   Python:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v2.3.5
 
     - name: Set up Python
       uses: actions/setup-python@v2
@@ -22,7 +22,7 @@ jobs:
     - uses: actions/cache@v2.1.6
       with:
         path: ~/.cache/pip
-        key: pip-${{ hashFiles('**/requirements.txt', '**/requirements-dev.txts') }}
+        key: pip-${{ hashFiles('**/requirements.txt', '**/requirements-dev.txt') }}
         restore-keys: pip-
 
     - name: Install Dependanices
