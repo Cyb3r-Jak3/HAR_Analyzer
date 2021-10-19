@@ -22,7 +22,7 @@ jobs:
     - uses: actions/cache@v2.1.6
       with:
         path: ~/.cache/pip
-        key: pip-${{ hashFiles('**/requirements.txt', '**/requirements-dev.txts') }}
+        key: pip-${{ hashFiles('**/requirements.txt', '**/requirements-dev.txt') }}
         restore-keys: pip-
 
     - name: Install Dependanices

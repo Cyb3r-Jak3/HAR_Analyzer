@@ -3,9 +3,8 @@ import os
 from flask import Flask
 from flask_hashing import Hashing
 from flask_cors import CORS
+from flask_redis import FlaskRedis
 
-if os.getenv("REDIS_URL"):
-    from flask_redis import FlaskRedis
 if os.getenv("SENTRY_DSN"):
     from sentry_sdk.integrations.flask import FlaskIntegration
     import sentry_sdk
