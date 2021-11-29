@@ -19,7 +19,7 @@ jobs:
       with:
         python-version: 3.6
 
-    - uses: actions/cache@v2.1.6
+    - uses: actions/cache@v2.1.7
       with:
         path: ~/.cache/pip
         key: pip-${{ hashFiles('**/requirements.txt', '**/requirements-dev.txt') }}
