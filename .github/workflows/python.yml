@@ -5,6 +5,8 @@ on:
     paths:
       - "app/**"
       - ".github/workflows/python.yml"
+      - "requirements.txt"
+      - "requirements-dev.txt"
   schedule:
     - cron: '0 8 * * 0'
 
