@@ -41,7 +41,7 @@ jobs:
 
     - name: Docker Meta
       id: meta
-      uses: docker/metadata-action@v3.7.0
+      uses: docker/metadata-action@v3.8.0
       with:
         images: cyb3rjak3/har_analyzer,ghcr.io/cyb3r-jak3/har_analyzer
         tags: |
