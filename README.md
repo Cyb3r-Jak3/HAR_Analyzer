@@ -8,11 +8,6 @@ This project uses [haralyzer](https://github.com/haralyzer/haralyzer)
 
 ## Using
 
-### Web
-
-~~Visit [https://har-analyzer.jwhite.network/](https://har-analyzer.jwhite.network/) use the web version.~~ Current offline
-
-
 ### Docker
 
 There is a docker image to run this locally. Docker image is [cyb3r-jak3/har_analyzer](https://hub.docker.com/repository/docker/cyb3rjak3/har_analyzer). 

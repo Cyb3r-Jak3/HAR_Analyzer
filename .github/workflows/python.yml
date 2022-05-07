@@ -7,8 +7,6 @@ on:
       - ".github/workflows/python.yml"
       - "requirements.txt"
       - "requirements-dev.txt"
-  schedule:
-    - cron: '0 8 * * 0'
 
 jobs:
   Python:
@@ -25,7 +23,6 @@ jobs:
       with:
         path: ~/.cache/pip
         key: pip-${{ hashFiles('**/requirements.txt', '**/requirements-dev.txt') }}
-        restore-keys: pip-
 
     - name: Install Dependanices
       run: |
