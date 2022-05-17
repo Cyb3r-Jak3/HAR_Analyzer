@@ -7,6 +7,8 @@ on:
       - ".github/workflows/python.yml"
       - "requirements.txt"
       - "requirements-dev.txt"
+    tags-ignore:
+      - "v**"
 
 jobs:
   Python:
