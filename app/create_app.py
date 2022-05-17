@@ -9,7 +9,7 @@ from flask_redis import FlaskRedis
 def create_app() -> Flask:
     """Creates the Flask app"""
     app = Flask(__name__)
-    app.secret_key = os.environ["FLASK_SECRET"]
+    app.secret_key = os.getenv("FLASK_SECRET", "INSECURE-SECRET")
     app.config.update(
         SESSION_COOKIE_SECURE=True,
         SESSION_COOKIE_HTTPONLY=True,

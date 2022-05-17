@@ -44,13 +44,13 @@ def require_auth(fuc):
 
 
 @app.route("/")
-def index():
+def index() -> str:
     """Render index page"""
     return render_template("index.jinja")
 
 
 @app.route("/about")
-def about():
+def about() -> str:
     """Render about page"""
     return render_template("about.jinja")
 
