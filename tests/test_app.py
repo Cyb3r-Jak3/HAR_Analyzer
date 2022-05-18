@@ -24,9 +24,16 @@ def test_upload(client):
     assert client.get("/upload").status_code == 200
 
     assert client.post("/upload").status_code == 302
+
     with open("./tests/example.har", "rb") as infile:
-        file = infile.read()
-    upload_resp = client.post("/upload", data={'har_file': (file, "example.har")})
-    assert upload_resp.status_code == 302
+        upload_resp = client.post("/upload", data={'har_file': (infile, "example.har")}, buffered=True,
+                                  content_type="multipart/form-data", follow_redirects=True)
+    assert upload_resp.status_code == 200
+    assert len(upload_resp.history) == 1
+    assert upload_resp.request.path == "/report"
 
 
+def test_entry_choice(authed_client):
+    assert authed_client.get("/api/entry_choice").status_code == 405
+    resp = authed_client.post("/api/entry_choice", json={"entry_id": 1})
+    assert resp.status_code == 200

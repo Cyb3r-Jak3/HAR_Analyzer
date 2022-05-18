@@ -39,3 +39,12 @@ def client():
     ctx.push()
     yield test_client
     ctx.pop()
+
+
+@pytest.fixture
+def authed_client(client):
+    with open("./tests/example.har", "rb") as infile:
+        client.post("/upload", data={'har_file': (infile, "example.har")}, buffered=True,
+                                  content_type="multipart/form-data", follow_redirects=True)
+    yield client
+    client.get("/logout")
