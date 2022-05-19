@@ -2,13 +2,15 @@ name: Python CI
 
 on:
   push:
+    branches:
+      - "**"
     paths:
       - "app/**"
       - ".github/workflows/python.yml"
       - "requirements.txt"
       - "requirements-dev.txt"
-#    tags-ignore:
-#      - "v**"
+    tags-ignore:
+      - "v**"
 
 jobs:
   Python:
