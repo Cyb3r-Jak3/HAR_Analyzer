@@ -41,4 +41,3 @@ def test_get_entries():
     entry = har_worker.get_entries("example.har", 2)
     assert isinstance(entry, HarEntry)
     assert entry.url == "https://cyberjake.xyz/css/main.css"
-

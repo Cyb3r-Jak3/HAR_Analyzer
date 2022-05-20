@@ -4,8 +4,8 @@ import haralyzer
 import pytest
 from dotenv import load_dotenv
 from flask.testing import FlaskClient
+
 load_dotenv()
-from app import app
 
 
 @pytest.fixture()
@@ -27,6 +27,9 @@ def har_entry(har_page):
 
 class TestClient(FlaskClient):
     def __init__(self):
+        load_dotenv()
+        from app import app
+
         self.application = app
         self.application.testing = True
         super().__init__(application=self.application)
@@ -35,7 +38,7 @@ class TestClient(FlaskClient):
 @pytest.fixture
 def client():
     test_client = TestClient()
-    ctx = app.app_context()
+    ctx = test_client.application.app_context()
     ctx.push()
     yield test_client
     ctx.pop()
@@ -44,7 +47,12 @@ def client():
 @pytest.fixture
 def authed_client(client):
     with open("./tests/example.har", "rb") as infile:
-        client.post("/upload", data={'har_file': (infile, "example.har")}, buffered=True,
-                                  content_type="multipart/form-data", follow_redirects=True)
+        client.post(
+            "/upload",
+            data={"har_file": (infile, "example.har")},
+            buffered=True,
+            content_type="multipart/form-data",
+            follow_redirects=True,
+        )
     yield client
     client.get("/logout")

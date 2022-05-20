@@ -87,7 +87,15 @@ def upload():
         file = request.files["har_file"]
         if file.filename == "":
             return render_template("error.jinja", message="No File upload"), 400
-        if file and allowed_file(file.filename):
+        if file:
+            if not allowed_file(file.filename):
+                return (
+                    render_template(
+                        "error.jinja",
+                        message=f"File extension {file.filename.split('.')[1]} is not valid",
+                    ),
+                    400,
+                )
             session["filename"] = app.hashing.hash_value(
                 file.read(), salt=app.secret_key
             )
@@ -112,7 +120,8 @@ def entry_choice():
 def logout():
     """Handles logging out"""
     try:
-        os.remove(os.path.join(app.config["UPLOAD_FOLDER"], session["filename"]))
+        if session["filename"]:
+            os.remove(os.path.join(app.config["UPLOAD_FOLDER"], session["filename"]))
         if app.using_redis:
             app.redis_client.delete(session["token"].bytes)
         session.clear()

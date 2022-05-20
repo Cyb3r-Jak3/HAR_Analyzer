@@ -21,6 +21,7 @@ def create_app() -> Flask:
         UPLOAD_FOLDER=os.getenv("UPLOAD_FOLDER", "/tmp"),  # nosec
     )
     CORS(app, methods=["GET", "POST", "OPTIONS"], supports_credential=True)
+    app.using_redis = False
     if os.environ.get("REDIS_TLS_URL"):
         url = urlparse(os.environ["REDIS_TLS_URL"])
         redis_cls = redis.Redis(
@@ -39,11 +40,9 @@ def create_app() -> Flask:
             username=url.username,
             password=url.password,
         )
+
     if redis_cls:
-        print("using redis")
         app.redis_client = FlaskRedis.from_custom_provider(provider=redis_cls, app=app)
         app.using_redis = True
-    else:
-        app.using_redis = False
     app.hashing = Hashing(app)
     return app
