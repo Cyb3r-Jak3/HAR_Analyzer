@@ -2,6 +2,8 @@ name: Python CI
 
 on:
   push:
+    branches:
+      - "**"
     paths:
       - "app/**"
       - ".github/workflows/python.yml"
@@ -13,6 +15,20 @@ on:
 jobs:
   Python:
     runs-on: ubuntu-latest
+    services:
+      # Label used to access the service container
+      redis:
+        # Docker Hub image
+        image: redis:6.2.3-alpine
+        # Set health checks to wait until redis has started
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          # Maps port 6379 on service container to the host
+          - 6379:6379
     steps:
     - uses: actions/checkout@v3
 
@@ -26,10 +42,22 @@ jobs:
         path: ~/.cache/pip
         key: pip-${{ hashFiles('**/requirements.txt', '**/requirements-dev.txt') }}
 
-    - name: Install Dependanices
+    - name: Install Dependencies
       run: |
         pip install --upgrade pip wheel
         pip install -r requirements-dev.txt
 
     - name: Lint
       run: make lint
+
+    - name: Test
+      run: |
+        make test
+        coverage xml
+      env:
+        REDIS_URL: "redis://localhost:6379"
+
+    - name: Report Code Coverage
+      uses: codecov/codecov-action@v3.1.0
+      with:
+        fail_ci_if_error: true

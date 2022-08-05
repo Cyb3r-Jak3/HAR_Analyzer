@@ -1,4 +1,4 @@
-PHONY: lint reformat
+PHONY: lint reformat test
 
 
 lint:
@@ -9,3 +9,6 @@ lint:
 
 reformat:
 	black app
+
+test:
+	python -m pytest --cov -vv

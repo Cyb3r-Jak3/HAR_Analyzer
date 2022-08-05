@@ -29,7 +29,7 @@ def require_auth(fuc):
 
     @wraps(fuc)
     def decorated_function(*args, **kwargs):
-        if not app.config.get("REDIS_URL"):
+        if not app.using_redis:
             return fuc(*args, **kwargs)
         session_hash = session.get("filename")
         if session_hash is None:
@@ -44,13 +44,13 @@ def require_auth(fuc):
 
 
 @app.route("/")
-def index():
+def index() -> str:
     """Render index page"""
     return render_template("index.jinja")
 
 
 @app.route("/about")
-def about():
+def about() -> str:
     """Render about page"""
     return render_template("about.jinja")
 
@@ -87,14 +87,22 @@ def upload():
         file = request.files["har_file"]
         if file.filename == "":
             return render_template("error.jinja", message="No File upload"), 400
-        if file and allowed_file(file.filename):
+        if file:
+            if not allowed_file(file.filename):
+                return (
+                    render_template(
+                        "error.jinja",
+                        message=f"File extension {file.filename.split('.')[1]} is not valid",
+                    ),
+                    400,
+                )
             session["filename"] = app.hashing.hash_value(
                 file.read(), salt=app.secret_key
             )
             file.stream.seek(0)
             file.save(os.path.join(app.config["UPLOAD_FOLDER"], session["filename"]))
             file.close()
-            if app.config.get("REDIS_URL"):
+            if app.using_redis:
                 session["token"] = uuid4()
                 app.redis_client.set(session["token"].bytes, session["filename"])
             return redirect(url_for("report"))
@@ -112,8 +120,9 @@ def entry_choice():
 def logout():
     """Handles logging out"""
     try:
-        os.remove(os.path.join(app.config["UPLOAD_FOLDER"], session["filename"]))
-        if app.config.get("REDIS_URL"):
+        if session["filename"]:
+            os.remove(os.path.join(app.config["UPLOAD_FOLDER"], session["filename"]))
+        if app.using_redis:
             app.redis_client.delete(session["token"].bytes)
         session.clear()
         return render_template(

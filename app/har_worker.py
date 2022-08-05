@@ -1,7 +1,9 @@
 """File that deals with all the Har files and parsing"""
 import json
 import os
-from haralyzer import HarParser, HarPage
+from typing import List
+
+from haralyzer import HarParser, HarPage, HarEntry
 
 
 def mimetype_splitter(mime_type: str) -> str:
@@ -53,7 +55,7 @@ def create_root_count(page: HarPage, attribute: str) -> dict:
     return results
 
 
-def get_entries(filename: str, entry_id: int = None) -> (dict, list):
+def get_entries(filename: str, entry_id: int = None) -> (HarEntry, List[HarEntry]):
     """Gets either all the entries or a certain one"""
     with open(
         os.path.join(os.getenv("UPLOAD_FOLDER", "/tmp"), filename),  # nosec
@@ -62,6 +64,6 @@ def get_entries(filename: str, entry_id: int = None) -> (dict, list):
     ) as process_file:
         render_pages = HarParser(json.loads(process_file.read())).pages
     items = [entry for page in render_pages for entry in page.entries]
-    if isinstance(entry_id, int):
+    if entry_id:
         return items[entry_id]
     return items
