@@ -42,7 +42,7 @@ jobs:
         path: ~/.cache/pip
         key: pip-${{ hashFiles('**/requirements.txt', '**/requirements-dev.txt') }}
 
-    - name: Install Dependanices
+    - name: Install Dependencies
       run: |
         pip install --upgrade pip wheel
         pip install -r requirements-dev.txt
@@ -51,6 +51,13 @@ jobs:
       run: make lint
 
     - name: Test
-      run: make test
+      run: |
+        make test
+        coverage xml
       env:
         REDIS_URL: "redis://localhost:6379"
+
+    - name: Report Code Coverage
+      uses: codecov/codecov-action@v3.1.0
+      with:
+        fail_ci_if_error: true
