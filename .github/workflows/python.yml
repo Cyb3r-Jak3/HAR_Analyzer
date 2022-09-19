@@ -58,6 +58,6 @@ jobs:
         REDIS_URL: "redis://localhost:6379"
 
     - name: Report Code Coverage
-      uses: codecov/codecov-action@v3.1.0
+      uses: codecov/codecov-action@v3.1.1
       with:
         fail_ci_if_error: true
