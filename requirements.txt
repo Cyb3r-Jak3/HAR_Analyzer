@@ -7,4 +7,4 @@ flask_redis == 0.4.0
 
 # Needed for Heroku Deployment
 gunicorn==20.1.0
-gevent==21.12.0
+gevent==22.8.0
