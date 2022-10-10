@@ -1,3 +1,4 @@
+# This project is no longer maintained in favor of https://github.com/Cyb3r-Jak3/workers-har-analysis
 HAR Analyzer
 ---
 [![Python CI](https://github.com/Cyb3r-Jak3/HAR_Analyzer/actions/workflows/python.yml/badge.svg)](https://github.com/Cyb3r-Jak3/HAR_Analyzer/actions/workflows/python.yml) [![Docker](https://github.com/Cyb3r-Jak3/HAR_Analyzer/actions/workflows/docker.yml/badge.svg)](https://github.com/Cyb3r-Jak3/HAR_Analyzer/actions/workflows/docker.yml) [![codecov](https://codecov.io/gh/Cyb3r-Jak3/HAR_Analyzer/branch/main/graph/badge.svg?token=RGNWJU22RL)](https://codecov.io/gh/Cyb3r-Jak3/HAR_Analyzer) 
